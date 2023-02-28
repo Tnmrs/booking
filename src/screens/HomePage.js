@@ -2,12 +2,48 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import '../auth.css';
 import '../main.css';
-import React, { useEffect, useState } from 'react';
+
 import { Rating } from 'react-simple-star-rating';
 import Slider from '../components/Slider';
 import HotelCard from '../components/HotelCard';
 
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+
+import { GET_HOTELS_REQUESTED } from '../store/actions';
+
 const HomePage = () => {
+  const dispatch = useDispatch();
+  const [searchHotel, setSearchHotel] = useState('');
+  const [checkInDate, setCheckInDate] = useState('');
+  const [checkOutDate, setCheckOutDate] = useState('');
+
+  const handleClick = () => {
+    dispatch({
+      type: GET_HOTELS_REQUESTED,
+      payload: {
+        name: searchHotel,
+        checkIn: checkInDate,
+        checkOut: checkOutDate,
+      },
+    });
+  };
+
+  const handleSearchChange = (e) => {
+    setSearchHotel(e.target.value);
+  };
+
+  const handleCheckInChange = (e) => {
+    setCheckInDate(e.target.value);
+  };
+
+  const handleCheckOutChange = (e) => {
+    const date = parseInt(e.target.value);
+    const newCheckOutDate = new Date(checkInDate);
+    newCheckOutDate.setDate(newCheckOutDate.getDate() + date);
+    setCheckOutDate(newCheckOutDate.toISOString().slice(0, 10));
+  };
+
   const [isFavorite, setIsFavorite] = useState(false);
   const onClickFavorite = () => {
     setIsFavorite(!isFavorite);
@@ -39,28 +75,47 @@ const HomePage = () => {
                   <div className="p-t-32 p-b-9 ">
                     <span className="title-form-home ">Локация</span>
                     <div className="wrap-input-home validate-input">
-                      <input className="input" type="text" name="city" placeholder="Город" />
+                      <input
+                        className="input"
+                        type="text"
+                        value={searchHotel}
+                        onChange={handleSearchChange}
+                      />
                     </div>
                   </div>
                   <div className="m-t-20">
                     <span className="title-form-home">Дата заселения </span>
                     <div className="wrap-input-home validate-input">
-                      <input className="input" type="date" />
+                      <input
+                        className="input"
+                        type="date"
+                        value={checkInDate}
+                        onChange={handleCheckInChange}
+                      />
                     </div>
                   </div>
                   <div className="p-t-32 p-b-9 ">
                     <span className="title-form-home">Количество дней </span>
                     <div className="wrap-input-home validate-input">
-                      <input className="input" type="text" />
+                      <input
+                        className="input"
+                        type="number"
+                        value={
+                          Math.round(
+                            (new Date(checkOutDate) - new Date(checkInDate)) /
+                              (1000 * 60 * 60 * 24),
+                          ) || ''
+                        }
+                        onChange={handleCheckOutChange}
+                      />
                     </div>
                   </div>
-
-                  <div class="container-btn">
-                    <button class="form-btn-home" type="submit">
-                      Найти
-                    </button>
-                  </div>
                 </form>
+                <div class="container-btn">
+                  <button class="form-btn-home" onClick={handleClick}>
+                    Найти
+                  </button>
+                </div>
               </div>
             </div>
           </div>
@@ -85,7 +140,7 @@ const HomePage = () => {
                     <div className="name-hotel">
                       <span>Moscow Marriott Grand Hotel</span>
 
-                      <img src="like.svg" alt="like" style={{ cursor: 'pointer' }} />
+                      <img src="like.svg" alt="like" />
                     </div>
                     <div className="date">
                       <span>28 June, 2020</span>
@@ -105,12 +160,7 @@ const HomePage = () => {
                     <div className="name-hotel">
                       <span>Moscow Marriott Grand Hotel</span>
 
-                      <img
-                        src="like.svg"
-                        alt="like"
-                        style={{ cursor: 'pointer' }}
-                        onClick={onClickFavorite}
-                      />
+                      <img src="like.svg" alt="like" onClick={onClickFavorite} />
                     </div>
                     <div className="date">
                       <span>28 June, 2020</span>
@@ -130,7 +180,7 @@ const HomePage = () => {
                     <div className="name-hotel">
                       <span>Moscow Marriott Grand Hotel</span>
 
-                      <img src="like.svg" alt="like" style={{ cursor: 'pointer' }} />
+                      <img src="like.svg" alt="like" />
                     </div>
                     <div className="date">
                       <span>28 June, 2020</span>

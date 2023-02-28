@@ -1,10 +1,7 @@
 import React, { useState } from 'react';
 import { Rating } from 'react-simple-star-rating';
 
-import { useDispatch } from 'react-redux';
-import { GET_HOTELS_REQUESTED } from '../store/actions';
-
-const HotelCard = ({ name, date, price, isFavorite, onClickFavorite }) => {
+const HotelCard = ({ isFavorite, onClickFavorite }) => {
   return (
     <div>
       <div className="card-hotels">
@@ -13,18 +10,14 @@ const HotelCard = ({ name, date, price, isFavorite, onClickFavorite }) => {
 
           <div className="hotel-info">
             <ul>
-              <li>{name}</li>
+              <li>ываываы</li>
             </ul>
             <p>28 June, 2020––1 день</p>
             <Rating size={20} className="rating" />
           </div>
         </div>
         <div className="card-right">
-          <img
-            style={{ cursor: 'pointer' }}
-            onClick={onClickFavorite}
-            src={isFavorite ? '/like.svg' : '/likepng.svg'}
-          />
+          <img onClick={onClickFavorite} src={isFavorite ? '/like.svg' : '/likepng.svg'} />
           <ul className="price-info">
             <p>Price:</p>
             <li>2342342</li>
