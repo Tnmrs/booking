@@ -1,7 +1,13 @@
 import React, { useState } from 'react';
 import { Rating } from 'react-simple-star-rating';
 
-const HotelCard = ({ isFavorite, onClickFavorite }) => {
+const HotelCard = ({ isFavorite, onClickFavorite, hotel, checkInDate }) => {
+  const currentDate = new Date(checkInDate).toLocaleDateString('ru-RU', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+  });
+
   return (
     <div>
       <div className="card-hotels">
@@ -10,9 +16,13 @@ const HotelCard = ({ isFavorite, onClickFavorite }) => {
 
           <div className="hotel-info">
             <ul>
-              <li>ываываы</li>
+              <li>{hotel.hotelName}</li>
             </ul>
-            <p>28 June, 2020––1 день</p>
+            <ul style={{ display: 'flex' }}>
+              <p>{currentDate}</p>
+              <p>––1 день</p>
+            </ul>
+
             <Rating size={20} className="rating" />
           </div>
         </div>
@@ -20,7 +30,7 @@ const HotelCard = ({ isFavorite, onClickFavorite }) => {
           <img onClick={onClickFavorite} src={isFavorite ? '/like.svg' : '/likepng.svg'} />
           <ul className="price-info">
             <p>Price:</p>
-            <li>2342342</li>
+            <li>{hotel.priceAvg} ₽</li>
           </ul>
         </div>
       </div>

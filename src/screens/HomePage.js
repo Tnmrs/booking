@@ -8,17 +8,22 @@ import Slider from '../components/Slider';
 import HotelCard from '../components/HotelCard';
 
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { GET_HOTELS_REQUESTED } from '../store/actions';
 
 const HomePage = () => {
   const dispatch = useDispatch();
+
   const [searchHotel, setSearchHotel] = useState('');
   const [checkInDate, setCheckInDate] = useState('');
   const [checkOutDate, setCheckOutDate] = useState('');
+  const [selectedCheckInDate, setSelectedCheckInDate] = useState(checkInDate);
 
-  const handleClick = () => {
+  const handleClick = (e) => {
+    e.preventDefault();
+
+    setSelectedCheckInDate(checkInDate);
     dispatch({
       type: GET_HOTELS_REQUESTED,
       payload: {
@@ -40,7 +45,7 @@ const HomePage = () => {
   const handleCheckOutChange = (e) => {
     const date = parseInt(e.target.value);
     const newCheckOutDate = new Date(checkInDate);
-    newCheckOutDate.setDate(newCheckOutDate.getDate() + date);
+    newCheckOutDate.setDate(newCheckOutDate.getDate() + (date < 1 ? 1 : date));
     setCheckOutDate(newCheckOutDate.toISOString().slice(0, 10));
   };
 
@@ -48,10 +53,23 @@ const HomePage = () => {
   const onClickFavorite = () => {
     setIsFavorite(!isFavorite);
   };
+
   // const [ratingValue, setRaingValue] = useState(0);
   // const handleRating = (rate: number) => {
   //   setRaingValue(rate);
   // };
+
+  const hotels = useSelector((state) => state.app.hotels);
+  const dateNumber =
+    Math.round((new Date(checkOutDate) - new Date(checkInDate)) / (1000 * 60 * 60 * 24)) || '';
+
+  const currentDate = selectedCheckInDate
+    ? new Date(selectedCheckInDate).toLocaleDateString('ru-RU', {
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric',
+      })
+    : '';
 
   return (
     <div>
@@ -91,6 +109,7 @@ const HomePage = () => {
                         type="date"
                         value={checkInDate}
                         onChange={handleCheckInChange}
+                        min={new Date().toISOString().slice(0, 10)}
                       />
                     </div>
                   </div>
@@ -100,12 +119,7 @@ const HomePage = () => {
                       <input
                         className="input"
                         type="number"
-                        value={
-                          Math.round(
-                            (new Date(checkOutDate) - new Date(checkInDate)) /
-                              (1000 * 60 * 60 * 24),
-                          ) || ''
-                        }
+                        value={dateNumber}
                         onChange={handleCheckOutChange}
                       />
                     </div>
@@ -183,7 +197,7 @@ const HomePage = () => {
                       <img src="like.svg" alt="like" />
                     </div>
                     <div className="date">
-                      <span>28 June, 2020</span>
+                      <span>{checkInDate}</span>
                       <span>––</span>
                       <span>1 день</span>
                     </div>
@@ -211,17 +225,26 @@ const HomePage = () => {
                   </div>
 
                   <div className="wrap-right">
-                    <span className="s-date">07 июля 2020</span>
+                    <span className="s-date">{currentDate}</span>
                   </div>
                 </div>
 
                 <div className="container-list-hotels">
                   <Slider />
                   <p className="title-hotels">Добавлено в Избранное 3 отеля</p>
+
                   <div className="container-card">
-                    <div>
-                      <HotelCard isFavorite={isFavorite} onClickFavorite={onClickFavorite} />
-                    </div>
+                    {hotels &&
+                      hotels.map((hotel) => (
+                        <div key={hotel.id}>
+                          <HotelCard
+                            isFavorite={isFavorite}
+                            onClickFavorite={onClickFavorite}
+                            hotel={hotel}
+                            checkInDate={selectedCheckInDate}
+                          />
+                        </div>
+                      ))}
                   </div>
                 </div>
               </div>
