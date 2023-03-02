@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Rating } from 'react-simple-star-rating';
 
-const HotelCard = ({ isFavorite, onClickFavorite, hotel, checkInDate }) => {
+const HotelCard = ({ isFavorite, onClickFavorite, hotel, checkInDate, checkOutDate }) => {
   const currentDate = new Date(checkInDate).toLocaleDateString('ru-RU', {
     day: 'numeric',
     month: 'long',
@@ -20,7 +20,7 @@ const HotelCard = ({ isFavorite, onClickFavorite, hotel, checkInDate }) => {
             </ul>
             <ul style={{ display: 'flex' }}>
               <p>{currentDate}</p>
-              <p>––1 день</p>
+              <p>––{checkOutDate} день</p>
             </ul>
 
             <Rating size={20} className="rating" />

@@ -15,15 +15,23 @@ import { GET_HOTELS_REQUESTED } from '../store/actions';
 const HomePage = () => {
   const dispatch = useDispatch();
 
-  const [searchHotel, setSearchHotel] = useState('');
-  const [checkInDate, setCheckInDate] = useState('');
-  const [checkOutDate, setCheckOutDate] = useState('');
+  const [searchHotel, setSearchHotel] = useState('Москва');
+  const [checkInDate, setCheckInDate] = useState(new Date().toISOString().slice(0, 10));
+  const tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate() + 1);
+
+  const [checkOutDate, setCheckOutDate] = useState(tomorrow.toISOString().slice(0, 10));
   const [selectedCheckInDate, setSelectedCheckInDate] = useState(checkInDate);
+  const [searchHotelValue, setSearchHotelValue] = useState(''); //Город
+  const [amountDays, setAmountDays] = useState('');
 
   const handleClick = (e) => {
     e.preventDefault();
 
     setSelectedCheckInDate(checkInDate);
+    setSearchHotelValue(searchHotel);
+    setAmountDays(dateNumber);
+
     dispatch({
       type: GET_HOTELS_REQUESTED,
       payload: {
@@ -60,8 +68,10 @@ const HomePage = () => {
   // };
 
   const hotels = useSelector((state) => state.app.hotels);
-  const dateNumber =
-    Math.round((new Date(checkOutDate) - new Date(checkInDate)) / (1000 * 60 * 60 * 24)) || '';
+
+  const dateNumber = (
+    Math.round((new Date(checkOutDate) - new Date(checkInDate)) / (1000 * 60 * 60 * 24)) || ''
+  ).toString();
 
   const currentDate = selectedCheckInDate
     ? new Date(selectedCheckInDate).toLocaleDateString('ru-RU', {
@@ -221,7 +231,7 @@ const HomePage = () => {
                   <div className="wrap-left">
                     <span className="s-hotel">Отели</span>
                     <img src="right.svg" alt="" />
-                    <span className="s-city">Название города</span>
+                    <span className="s-city">{searchHotelValue}</span>
                   </div>
 
                   <div className="wrap-right">
@@ -242,6 +252,7 @@ const HomePage = () => {
                             onClickFavorite={onClickFavorite}
                             hotel={hotel}
                             checkInDate={selectedCheckInDate}
+                            checkOutDate={amountDays}
                           />
                         </div>
                       ))}
