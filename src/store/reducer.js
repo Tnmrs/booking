@@ -1,8 +1,9 @@
-import { GET_HOTELS_SUCCESS } from './actions';
+import { ADD_TO_FAVORITES, GET_HOTELS_SUCCESS } from './actions';
 
 export const reducer = (
   state = {
-    hotels: null,
+    hotels: [],
+    favoriteHotels: [],
   },
   action,
 ) => {
@@ -14,6 +15,12 @@ export const reducer = (
         hotels,
       };
     }
+
+    case ADD_TO_FAVORITES:
+      return {
+        ...state,
+        favoriteHotels: [...state.favoriteHotels, action.payload],
+      };
     default: {
       return state;
     }

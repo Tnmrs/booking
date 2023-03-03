@@ -11,19 +11,36 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { GET_HOTELS_REQUESTED } from '../store/actions';
+import Favorite from '../components/Favorite';
+import Header from '../components/Header';
 
 const HomePage = () => {
   const dispatch = useDispatch();
 
   const [searchHotel, setSearchHotel] = useState('Москва');
   const [checkInDate, setCheckInDate] = useState(new Date().toISOString().slice(0, 10));
+
   const tomorrow = new Date();
   tomorrow.setDate(tomorrow.getDate() + 1);
 
   const [checkOutDate, setCheckOutDate] = useState(tomorrow.toISOString().slice(0, 10));
   const [selectedCheckInDate, setSelectedCheckInDate] = useState(checkInDate);
   const [searchHotelValue, setSearchHotelValue] = useState(''); //Город
-  const [amountDays, setAmountDays] = useState('');
+  const [amountDays, setAmountDays] = useState(''); //дни
+
+  /*SORT*/
+
+  const [sortBy, setSortBy] = useState(null);
+
+  const sortByRating = () => {
+    setSortBy('rating');
+    hotels.sort((a, b) => b.rating - a.rating);
+  };
+
+  const sortByPrice = () => {
+    setSortBy('price');
+    hotels.sort((a, b) => a.price - b.price);
+  };
 
   const handleClick = (e) => {
     e.preventDefault();
@@ -62,11 +79,6 @@ const HomePage = () => {
     setIsFavorite(!isFavorite);
   };
 
-  // const [ratingValue, setRaingValue] = useState(0);
-  // const handleRating = (rate: number) => {
-  //   setRaingValue(rate);
-  // };
-
   const hotels = useSelector((state) => state.app.hotels);
 
   const dateNumber = (
@@ -83,17 +95,7 @@ const HomePage = () => {
 
   return (
     <div>
-      <div className="header">
-        <nav className="nav">
-          <ul>
-            <li className="logo-name">Simple Hotel Check</li>
-          </ul>
-          <ul className="right">
-            <li>Выйти</li>
-            <img src="exit.svg" alt="exit" />
-          </ul>
-        </nav>
-      </div>
+      <Header />
       <div class="container-page">
         <div className="lefts">
           <div class="block block1">
@@ -147,77 +149,31 @@ const HomePage = () => {
           <div class="block block2">
             <div className="container-home-location">
               <div className="wrap-home-price">
-                <div className="title-rating">
-                  <span>Избранное</span>
-                </div>
-                <div className="sort">
-                  <div>
-                    <button>Рейтинг</button>
+                <div>
+                  <div className="title-rating">
+                    <span>Избранное</span>
                   </div>
-                  <div>
-                    <button>Цена</button>
-                  </div>
-                </div>
 
-                <div className="list-hotels">
-                  <div className="card-hotel">
-                    <div className="name-hotel">
-                      <span>Moscow Marriott Grand Hotel</span>
-
-                      <img src="like.svg" alt="like" />
+                  <div className="sort">
+                    <div>
+                      <img
+                        src="rating.svg"
+                        alt=""
+                        style={{ cursor: 'pointer' }}
+                        onClick={sortByRating}
+                      />
                     </div>
-                    <div className="date">
-                      <span>28 June, 2020</span>
-                      <span>––</span>
-                      <span>1 день</span>
-                    </div>
-
-                    <div className="price">
-                      <Rating size={20} className="rating" />
-                      <p className="title-p">Price:</p>
-                      <p className="price-title">23 924 ₽</p>
+                    <div>
+                      <img
+                        src="price.svg"
+                        alt=""
+                        style={{ cursor: 'pointer' }}
+                        onClick={sortByPrice}
+                      />
                     </div>
                   </div>
-                  <hr className="price-line" />
 
-                  <div className="card-hotel">
-                    <div className="name-hotel">
-                      <span>Moscow Marriott Grand Hotel</span>
-
-                      <img src="like.svg" alt="like" onClick={onClickFavorite} />
-                    </div>
-                    <div className="date">
-                      <span>28 June, 2020</span>
-                      <span>––</span>
-                      <span>1 день</span>
-                    </div>
-
-                    <div className="price">
-                      <Rating size={20} className="rating" />
-                      <p className="title-p">Price:</p>
-                      <p className="price-title">23 924 ₽</p>
-                    </div>
-                  </div>
-                  <hr className="price-line" />
-
-                  <div className="card-hotel">
-                    <div className="name-hotel">
-                      <span>Moscow Marriott Grand Hotel</span>
-
-                      <img src="like.svg" alt="like" />
-                    </div>
-                    <div className="date">
-                      <span>{checkInDate}</span>
-                      <span>––</span>
-                      <span>1 день</span>
-                    </div>
-
-                    <div className="price">
-                      <Rating size={20} className="rating" />
-                      <p className="title-p">Price:</p>
-                      <p className="price-title">23 924 ₽</p>
-                    </div>
-                  </div>
+                  <Favorite checkInDate={selectedCheckInDate} />
                 </div>
               </div>
             </div>

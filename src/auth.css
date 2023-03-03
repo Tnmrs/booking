@@ -245,6 +245,7 @@
   align-items: center;
   min-height: 400px;
   align-items: baseline;
+  overflow: auto;
 }
 
 .wrap-input-home {
@@ -351,12 +352,15 @@
 .sort {
   margin-top: 36px;
   display: flex;
+  margin-left: 32px;
+  gap: 8px;
 }
 
 /* Cart Hotel */
 
 .list-hotels {
-  overflow: auto;
+  margin-top: 32px;
+  margin-left: 32px;
 }
 .card-hotel {
   width: 296px;
