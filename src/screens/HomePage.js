@@ -3,7 +3,6 @@ import 'slick-carousel/slick/slick-theme.css';
 import '../auth.css';
 import '../main.css';
 
-import { Rating } from 'react-simple-star-rating';
 import Slider from '../components/Slider';
 import HotelCard from '../components/HotelCard';
 
@@ -11,36 +10,26 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { GET_HOTELS_REQUESTED } from '../store/actions';
-import Favorite from '../components/Favorite';
+
 import Header from '../components/Header';
+import InputBlock from '../components/InputBlock';
+import Favorites from '../components/Favorites';
 
 const HomePage = () => {
   const dispatch = useDispatch();
 
   const [searchHotel, setSearchHotel] = useState('Москва');
   const [checkInDate, setCheckInDate] = useState(new Date().toISOString().slice(0, 10));
-
   const tomorrow = new Date();
   tomorrow.setDate(tomorrow.getDate() + 1);
 
   const [checkOutDate, setCheckOutDate] = useState(tomorrow.toISOString().slice(0, 10));
   const [selectedCheckInDate, setSelectedCheckInDate] = useState(checkInDate);
-  const [searchHotelValue, setSearchHotelValue] = useState(''); //Город
+  const [searchHotelValue, setSearchHotelValue] = useState('Москва'); //Город
   const [amountDays, setAmountDays] = useState(''); //дни
 
-  /*SORT*/
-
-  const [sortBy, setSortBy] = useState(null);
-
-  const sortByRating = () => {
-    setSortBy('rating');
-    hotels.sort((a, b) => b.rating - a.rating);
-  };
-
-  const sortByPrice = () => {
-    setSortBy('price');
-    hotels.sort((a, b) => a.price - b.price);
-  };
+  const [sort, setSort] = useState('');
+  const favoriteHotels = useSelector((state) => state.app.favoriteHotels);
 
   const handleClick = (e) => {
     e.preventDefault();
@@ -93,59 +82,28 @@ const HomePage = () => {
       })
     : '';
 
+  const handleSortByPrice = () => {
+    setSort('price');
+  };
+
+  const handleSortByRating = () => {
+    setSort('rating');
+  };
+
   return (
     <div>
       <Header />
       <div class="container-page">
         <div className="lefts">
-          <div class="block block1">
-            <div className="container-home-location">
-              <div className="wrap-home ">
-                <form class="form validate-form ">
-                  <div className="p-t-32 p-b-9 ">
-                    <span className="title-form-home ">Локация</span>
-                    <div className="wrap-input-home validate-input">
-                      <input
-                        className="input"
-                        type="text"
-                        value={searchHotel}
-                        onChange={handleSearchChange}
-                      />
-                    </div>
-                  </div>
-                  <div className="m-t-20">
-                    <span className="title-form-home">Дата заселения </span>
-                    <div className="wrap-input-home validate-input">
-                      <input
-                        className="input"
-                        type="date"
-                        value={checkInDate}
-                        onChange={handleCheckInChange}
-                        min={new Date().toISOString().slice(0, 10)}
-                      />
-                    </div>
-                  </div>
-                  <div className="p-t-32 p-b-9 ">
-                    <span className="title-form-home">Количество дней </span>
-                    <div className="wrap-input-home validate-input">
-                      <input
-                        className="input"
-                        type="number"
-                        value={dateNumber}
-                        onChange={handleCheckOutChange}
-                      />
-                    </div>
-                  </div>
-                </form>
-                <div class="container-btn">
-                  <button class="form-btn-home" onClick={handleClick}>
-                    Найти
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-
+          <InputBlock
+            searchHotel={searchHotel}
+            handleSearchChange={handleSearchChange}
+            checkInDate={checkInDate}
+            handleCheckInChange={handleCheckInChange}
+            dateNumber={dateNumber}
+            handleCheckOutChange={handleCheckOutChange}
+            handleClick={handleClick}
+          />
           <div class="block block2">
             <div className="container-home-location">
               <div className="wrap-home-price">
@@ -160,7 +118,7 @@ const HomePage = () => {
                         src="rating.svg"
                         alt=""
                         style={{ cursor: 'pointer' }}
-                        onClick={sortByRating}
+                        onClick={handleSortByRating}
                       />
                     </div>
                     <div>
@@ -168,17 +126,23 @@ const HomePage = () => {
                         src="price.svg"
                         alt=""
                         style={{ cursor: 'pointer' }}
-                        onClick={sortByPrice}
+                        onClick={handleSortByPrice}
                       />
                     </div>
                   </div>
 
-                  <Favorite checkInDate={selectedCheckInDate} />
+                  <Favorites
+                    checkOutDate={amountDays}
+                    checkInDate={selectedCheckInDate}
+                    favoriteHotels={favoriteHotels}
+                    sort={sort}
+                  />
                 </div>
               </div>
             </div>
           </div>
         </div>
+
         <div className="rights">
           <div class="block block3">
             <div className="container-home-location">
@@ -209,6 +173,7 @@ const HomePage = () => {
                             hotel={hotel}
                             checkInDate={selectedCheckInDate}
                             checkOutDate={amountDays}
+                            currentDate={currentDate}
                           />
                         </div>
                       ))}

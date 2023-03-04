@@ -512,7 +512,7 @@
 /* Календарь*/
 
 input[type='date']::-webkit-calendar-picker-indicator {
-  background: url('../public/calendar-t.svg') #f7f9fc no-repeat 90% 50%;
+  background: url('../public/calendars.svg') #f7f9fc 90% 50%;
 }
 
 .slick-slide:active {

@@ -1,30 +1,26 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { ADD_TO_FAVORITES } from '../store/actions';
+import { ADD_TO_FAVORITES, REMOVE_FROM_FAVORITES } from '../store/actions';
 import { Rating } from 'react-simple-star-rating';
 
-const HotelCard = ({ hotel, checkInDate, checkOutDate }) => {
-  const [isAdded, setIsAdded] = useState(false);
+const HotelCard = ({ hotel, checkOutDate, currentDate }) => {
   const dispatch = useDispatch();
 
+  const [isAdded, setIsAdded] = useState(false);
+
   const [rating, setRating] = useState(hotel.stars);
+
   const handleRating = (stars) => {
     setRating(stars);
   };
 
-  const handleAddToFavorites = () => {
+  const toogleFavorite = () => {
     setIsAdded(!isAdded);
     dispatch({
-      type: ADD_TO_FAVORITES,
+      type: isAdded ? REMOVE_FROM_FAVORITES : ADD_TO_FAVORITES,
       payload: hotel,
     });
   };
-
-  const currentDate = new Date(checkInDate).toLocaleDateString('ru-RU', {
-    day: 'numeric',
-    month: 'long',
-    year: 'numeric',
-  });
 
   return (
     <div>
@@ -52,7 +48,7 @@ const HotelCard = ({ hotel, checkInDate, checkOutDate }) => {
           </div>
         </div>
         <div className="card-right">
-          <img onClick={handleAddToFavorites} src={isAdded ? '/like.svg' : '/likepng.svg'} />
+          <img onClick={toogleFavorite} src={isAdded ? '/like.svg' : '/likepng.svg'} />
           <ul className="price-info">
             <p>Price:</p>
             <li>{hotel.priceAvg} ₽</li>
