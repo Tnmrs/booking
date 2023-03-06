@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { ADD_TO_FAVORITES, REMOVE_FROM_FAVORITES } from '../store/actions';
 import { Rating } from 'react-simple-star-rating';
 
@@ -9,18 +9,34 @@ const HotelCard = ({ hotel, checkOutDate, currentDate }) => {
   const [isAdded, setIsAdded] = useState(false);
 
   const [rating, setRating] = useState(hotel.stars);
-
+  const favoriteHotels = useSelector((state) => state.app.favoriteHotels);
   const handleRating = (stars) => {
     setRating(stars);
   };
 
-  const toogleFavorite = () => {
-    setIsAdded(!isAdded);
-    dispatch({
-      type: isAdded ? REMOVE_FROM_FAVORITES : ADD_TO_FAVORITES,
-      payload: hotel,
-    });
+  const toggleFavorite = () => {
+    if (isAdded) {
+      setIsAdded(false);
+      dispatch({
+        type: REMOVE_FROM_FAVORITES,
+        payload: hotel,
+      });
+    } else {
+      setIsAdded(true);
+      dispatch({
+        type: ADD_TO_FAVORITES,
+        payload: hotel,
+      });
+    }
   };
+
+  useEffect(() => {
+    if (favoriteHotels.some((favoriteHotel) => favoriteHotel.hotelId === hotel.hotelId)) {
+      setIsAdded(true);
+    } else {
+      setIsAdded(false);
+    }
+  }, [favoriteHotels, hotel.hotelId]);
 
   return (
     <div>
@@ -48,7 +64,7 @@ const HotelCard = ({ hotel, checkOutDate, currentDate }) => {
           </div>
         </div>
         <div className="card-right">
-          <img onClick={toogleFavorite} src={isAdded ? '/like.svg' : '/likepng.svg'} />
+          <img onClick={toggleFavorite} src={isAdded ? '/like.svg' : '/likepng.svg'} />
           <ul className="price-info">
             <p>Price:</p>
             <li>{hotel.priceAvg} ₽</li>

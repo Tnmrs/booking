@@ -15,7 +15,7 @@ const Favorites = ({ checkOutDate, favoriteHotels, sort }) => {
   return (
     <div>
       {sortedHotels.map((hotel) => (
-        <HotelCard hotel={hotel} checkOutDate={checkOutDate} />
+        <HotelCard key={hotel.id} hotel={hotel} checkOutDate={checkOutDate} rating={hotel.stars} />
       ))}
     </div>
   );
