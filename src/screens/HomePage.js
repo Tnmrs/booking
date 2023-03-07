@@ -187,6 +187,7 @@ const HomePage = () => {
                             checkInDate={selectedCheckInDate}
                             checkOutDate={amountDays}
                             currentDate={currentDate}
+                            hotelWordForm={hotelWordForm}
                           />
                         </div>
                       ))}

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { ADD_TO_FAVORITES, REMOVE_FROM_FAVORITES } from '../store/actions';
 import { Rating } from 'react-simple-star-rating';
 
-const HotelCard = ({ hotel, checkOutDate, currentDate }) => {
+const HotelCard = ({ hotel, checkOutDate, currentDate, hotelWordForm }) => {
   const dispatch = useDispatch();
 
   const [isAdded, setIsAdded] = useState(false);
@@ -40,6 +40,16 @@ const HotelCard = ({ hotel, checkOutDate, currentDate }) => {
     }
   }, [favoriteHotels, hotel.hotelId]);
 
+  const hotelCardForm = (num) => {
+    if (num % 10 === 1 && num % 100 !== 11) {
+      return 'день';
+    } else if ([2, 3, 4].includes(num % 10) && ![12, 13, 14].includes(num % 100)) {
+      return 'дня';
+    } else {
+      return 'дней';
+    }
+  };
+
   return (
     <div>
       <div className="card-hotels">
@@ -52,7 +62,9 @@ const HotelCard = ({ hotel, checkOutDate, currentDate }) => {
             </ul>
             <ul style={{ display: 'flex' }}>
               <p>{currentDate}</p>
-              <p>––{checkOutDate} день</p>
+              <p>
+                ––{checkOutDate} {hotelCardForm(checkOutDate)}
+              </p>
             </ul>
 
             <Rating
