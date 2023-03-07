@@ -6,7 +6,7 @@ const Favorites = ({ checkOutDate, favoriteHotels, sort }) => {
     if (sort === 'price') {
       return favoriteHotels.slice().sort((a, b) => a.priceFrom - b.priceFrom);
     } else if (sort === 'rating') {
-      return favoriteHotels.slice().sort((a, b) => b.stars - a.rating);
+      return favoriteHotels.slice().sort((a, b) => b.stars - a.stars);
     } else {
       return favoriteHotels;
     }
@@ -15,7 +15,12 @@ const Favorites = ({ checkOutDate, favoriteHotels, sort }) => {
   return (
     <div>
       {sortedHotels.map((hotel) => (
-        <HotelCard key={hotel.id} hotel={hotel} checkOutDate={checkOutDate} rating={hotel.stars} />
+        <HotelCard
+          key={hotel.hotelId}
+          hotel={hotel}
+          checkOutDate={checkOutDate}
+          rating={hotel.stars}
+        />
       ))}
     </div>
   );

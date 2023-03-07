@@ -9,7 +9,9 @@ const HotelCard = ({ hotel, checkOutDate, currentDate }) => {
   const [isAdded, setIsAdded] = useState(false);
 
   const [rating, setRating] = useState(hotel.stars);
+
   const favoriteHotels = useSelector((state) => state.app.favoriteHotels);
+
   const handleRating = (stars) => {
     setRating(stars);
   };
