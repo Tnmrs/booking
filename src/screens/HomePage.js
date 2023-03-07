@@ -68,6 +68,17 @@ const HomePage = () => {
     setIsFavorite(!isFavorite);
   };
 
+  const numFavorites = favoriteHotels.length;
+  const hotelWordForm = (num) => {
+    if (num % 10 === 1 && num % 100 !== 11) {
+      return 'отель';
+    } else if ([2, 3, 4].includes(num % 10) && ![12, 13, 14].includes(num % 100)) {
+      return 'отеля';
+    } else {
+      return 'отелей';
+    }
+  };
+
   const hotels = useSelector((state) => state.app.hotels);
 
   const dateNumber = (
@@ -161,7 +172,9 @@ const HomePage = () => {
 
                 <div className="container-list-hotels">
                   <Slider />
-                  <p className="title-hotels">Добавлено в Избранное 3 отеля</p>
+                  <p className="title-hotels">
+                    Добавлено в Избранное {numFavorites} {hotelWordForm(numFavorites)}
+                  </p>
 
                   <div className="container-card">
                     {hotels &&
