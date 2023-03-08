@@ -8,6 +8,7 @@ const InputBlock = ({
   dateNumber,
   handleCheckOutChange,
   handleClick,
+  amountDays,
 }) => {
   return (
     <div class="block block1">

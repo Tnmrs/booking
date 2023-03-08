@@ -147,6 +147,7 @@ const HomePage = () => {
                     checkInDate={selectedCheckInDate}
                     favoriteHotels={favoriteHotels}
                     sort={sort}
+                    currentDate={currentDate}
                   />
                 </div>
               </div>

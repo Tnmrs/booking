@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 
 import HotelCard from './HotelCard';
-const Favorites = ({ checkOutDate, favoriteHotels, sort }) => {
+const Favorites = ({ checkOutDate, favoriteHotels, sort, currentDate }) => {
   const sortedHotels = useMemo(() => {
     if (sort === 'price') {
       return favoriteHotels.slice().sort((a, b) => a.priceFrom - b.priceFrom);
@@ -20,6 +20,7 @@ const Favorites = ({ checkOutDate, favoriteHotels, sort }) => {
           hotel={hotel}
           checkOutDate={checkOutDate}
           rating={hotel.stars}
+          currentDate={currentDate}
         />
       ))}
     </div>
