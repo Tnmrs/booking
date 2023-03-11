@@ -3,13 +3,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { ADD_TO_FAVORITES, REMOVE_FROM_FAVORITES } from '../store/actions';
 import { Rating } from 'react-simple-star-rating';
 
-const HotelCard = ({ hotel, checkOutDate, currentDate }) => {
+const CardHotels = ({ hotel, checkOutDate, currentDate }) => {
   const dispatch = useDispatch();
-
   const [isAdded, setIsAdded] = useState(false);
-
   const [rating, setRating] = useState(hotel.stars);
-
   const favoriteHotels = useSelector((state) => state.app.favoriteHotels);
 
   const handleRating = (stars) => {
@@ -31,7 +28,6 @@ const HotelCard = ({ hotel, checkOutDate, currentDate }) => {
       });
     }
   };
-
   useEffect(() => {
     if (favoriteHotels.some((favoriteHotel) => favoriteHotel.hotelId === hotel.hotelId)) {
       setIsAdded(true);
@@ -51,22 +47,19 @@ const HotelCard = ({ hotel, checkOutDate, currentDate }) => {
   };
 
   return (
-    <div>
-      <div className="card-hotels">
-        <div className="card-left">
-          <img src="Ellipse.png" alt="" width={64} height={64} />
-
-          <div className="hotel-info">
-            <ul>
-              <li>{hotel.hotelName}</li>
-            </ul>
-            <ul style={{ display: 'flex' }}>
+    <div className="hotel-list">
+      <div className="hotel-list-block">
+        <div className="hotel-card-left">
+          <img src="haus.png" alt="" width={64} height={64} />
+          <div className="hotel-list-card-title">
+            <p className="hotel-list-title">{hotel.hotelName}</p>
+            <div className="hotel-list-card-date">
               <p>{currentDate}</p>
+              <p>-</p>
               <p>
-                ––{checkOutDate} {hotelCardForm(checkOutDate)}
+                {checkOutDate} {hotelCardForm(checkOutDate)}
               </p>
-            </ul>
-
+            </div>
             <Rating
               size={20}
               className="rating"
@@ -74,20 +67,25 @@ const HotelCard = ({ hotel, checkOutDate, currentDate }) => {
               ratingValue={rating}
               readonly
               initialValue={rating}
+              fillColor="#CDBC1E"
             />
           </div>
         </div>
-        <div className="card-right">
-          <img onClick={toggleFavorite} src={isAdded ? '/like.svg' : '/likepng.svg'} />
-          <ul className="price-info">
+
+        <div className="hotel-card-right">
+          <div className="hotel-card-fav-icon">
+            <img onClick={toggleFavorite} src={isAdded ? '/like.svg' : '/likepng.svg'} />
+          </div>
+
+          <div className="hotel-card-price">
             <p>Price:</p>
-            <li>{hotel.priceAvg} ₽</li>
-          </ul>
+            <h3>{hotel.priceAvg} ₽</h3>
+          </div>
         </div>
       </div>
-      <hr className="price-line" />
+      <hr className="hotel-list-line" />
     </div>
   );
 };
 
-export default HotelCard;
+export default CardHotels;

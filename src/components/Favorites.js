@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
+import CardFavorite from './CardFavorite';
 
-import HotelCard from './HotelCard';
 const Favorites = ({ checkOutDate, favoriteHotels, sort, currentDate }) => {
   const sortedHotels = useMemo(() => {
     if (sort === 'price') {
@@ -15,7 +15,7 @@ const Favorites = ({ checkOutDate, favoriteHotels, sort, currentDate }) => {
   return (
     <div>
       {sortedHotels.map((hotel) => (
-        <HotelCard
+        <CardFavorite
           key={hotel.hotelId}
           hotel={hotel}
           checkOutDate={checkOutDate}

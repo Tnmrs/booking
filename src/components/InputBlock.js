@@ -9,6 +9,7 @@ const InputBlock = ({
   handleCheckOutChange,
   handleClick,
   amountDays,
+  numDays,
 }) => {
   return (
     <div class="block block1">
@@ -44,8 +45,9 @@ const InputBlock = ({
                 <input
                   className="input"
                   type="text"
-                  value={dateNumber}
+                  value={numDays}
                   onChange={handleCheckOutChange}
+                  min="1"
                 />
               </div>
             </div>
