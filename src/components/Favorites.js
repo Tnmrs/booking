@@ -13,7 +13,7 @@ const Favorites = ({ checkOutDate, favoriteHotels, sort, currentDate }) => {
   }, [favoriteHotels, sort]);
 
   return (
-    <div>
+    <div className="sorted-card-list">
       {sortedHotels.map((hotel) => (
         <CardFavorite
           key={hotel.hotelId}
