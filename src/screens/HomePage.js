@@ -6,12 +6,27 @@ import Slider from '../components/Slider';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { GET_HOTELS_REQUESTED } from '../store/actions';
+import { useEffect } from 'react';
 import Header from '../components/Header';
 import Favorites from '../components/Favorites';
 import CardHotels from '../components/CardHotels';
 
 const HomePage = () => {
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch({
+      type: GET_HOTELS_REQUESTED,
+      payload: {
+        name: 'Москва',
+        checkIn: new Date().toISOString().slice(0, 10),
+        checkOut: new Date(new Date().getTime() + 1 * 24 * 60 * 60 * 1000)
+          .toISOString()
+          .slice(0, 10),
+      },
+    });
+  }, [dispatch]);
+
   const [sortByRating, setSortByRating] = useState(true);
   const [sortByPrice, setSortByPrice] = useState(false);
   const [searchHotel, setSearchHotel] = useState('Москва');
@@ -20,6 +35,7 @@ const HomePage = () => {
 
   const [selectedCheckInDate, setSelectedCheckInDate] = useState(checkInDate);
   const [searchHotelValue, setSearchHotelValue] = useState('Москва'); //Город
+  const [dateNumberOf, setDateNumberOf] = useState('');
 
   const [sort, setSort] = useState('');
   const favoriteHotels = useSelector((state) => state.app.favoriteHotels);
@@ -29,6 +45,8 @@ const HomePage = () => {
 
     setSelectedCheckInDate(checkInDate);
     setSearchHotelValue(searchHotel);
+    setDateNumberOf(amountDays);
+
     const checkOutDate = new Date(
       new Date(checkInDate).getTime() + (Number(amountDays) - 1) * 24 * 60 * 60 * 1000,
     )
@@ -89,6 +107,12 @@ const HomePage = () => {
     setSortByRating(true);
     setSortByPrice(false);
   };
+
+  const date = new Date(
+    new Date(checkInDate).getTime() + (Number(amountDays) - 1) * 24 * 60 * 60 * 1000,
+  )
+    .toISOString()
+    .slice(0, 10);
 
   return (
     <div>
@@ -183,7 +207,7 @@ const HomePage = () => {
                   </div>
 
                   <Favorites
-                    checkOutDate={amountDays}
+                    checkOutDate={dateNumberOf}
                     checkInDate={selectedCheckInDate}
                     favoriteHotels={favoriteHotels}
                     sort={sort}
@@ -226,7 +250,7 @@ const HomePage = () => {
                             onClickFavorite={onClickFavorite}
                             hotel={hotel}
                             checkInDate={selectedCheckInDate}
-                            checkOutDate={amountDays}
+                            checkOutDate={dateNumberOf}
                             currentDate={currentDate}
                             hotelWordForm={hotelWordForm}
                           />
