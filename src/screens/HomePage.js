@@ -12,6 +12,8 @@ import CardHotels from '../components/CardHotels';
 
 const HomePage = () => {
   const dispatch = useDispatch();
+  const [sortByRating, setSortByRating] = useState(true);
+  const [sortByPrice, setSortByPrice] = useState(false);
   const [searchHotel, setSearchHotel] = useState('Москва');
   const [checkInDate, setCheckInDate] = useState(new Date().toISOString().slice(0, 10));
   const [amountDays, setAmountDays] = useState(1); //дни
@@ -77,11 +79,15 @@ const HomePage = () => {
     : '';
 
   const handleSortByPrice = () => {
+    setSortByRating(false);
+    setSortByPrice(true);
     setSort('price');
   };
 
   const handleSortByRating = () => {
     setSort('rating');
+    setSortByRating(true);
+    setSortByPrice(false);
   };
 
   return (
@@ -159,7 +165,7 @@ const HomePage = () => {
                     <div>
                       <img
                         className="rating-image"
-                        src="rating.svg"
+                        src={sortByRating ? 'rating-active.svg' : 'rating-notactive.svg'}
                         alt=""
                         style={{ cursor: 'pointer' }}
                         onClick={handleSortByRating}
@@ -168,7 +174,7 @@ const HomePage = () => {
                     <div>
                       <img
                         className="price-image"
-                        src="price-notactive.svg"
+                        src={sortByPrice ? 'price-active.svg' : 'price-notactive.svg'}
                         alt=""
                         style={{ cursor: 'pointer' }}
                         onClick={handleSortByPrice}
