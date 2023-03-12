@@ -74,7 +74,13 @@ const CardHotels = ({ hotel, checkOutDate, currentDate }) => {
 
         <div className="hotel-card-right">
           <div className="hotel-card-fav-icon">
-            <img onClick={toggleFavorite} src={isAdded ? '/like.svg' : '/likepng.svg'} />
+            <img
+              className="hotel-card-img"
+              onClick={toggleFavorite}
+              onMouseOver={(e) => (e.currentTarget.src = '/like-hover.svg')}
+              onMouseLeave={(e) => (e.currentTarget.src = isAdded ? '/like.svg' : '/likepng.svg')}
+              src={isAdded ? '/like.svg' : '/likepng.svg'}
+            />
           </div>
 
           <div className="hotel-card-price">

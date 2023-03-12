@@ -88,11 +88,7 @@ const Auth = () => {
                   placeholder=""
                 />
               </div>
-              {emailDirty && emailError && (
-                <div className="error" style={{ color: 'red' }}>
-                  {emailError}
-                </div>
-              )}
+              {emailDirty && emailError && <div className="error">{emailError}</div>}
 
               <div class="p-t-13 p-b-9">
                 <span class="title-form">Пароль</span>
@@ -108,11 +104,7 @@ const Auth = () => {
                   placeholder=""
                 />
               </div>
-              {passwordDirty && passwordError && (
-                <div className="error" style={{ color: 'red' }}>
-                  {passwordError}
-                </div>
-              )}
+              {passwordDirty && passwordError && <div className="error">{passwordError}</div>}
 
               <div class="container-btn">
                 <button class="form-btn" type="submit">

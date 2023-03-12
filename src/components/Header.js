@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { Link } from 'react-router-dom';
 const Header = () => {
   return (
     <div className="header">
@@ -8,7 +8,9 @@ const Header = () => {
           <li className="logo-name">Simple Hotel Check</li>
         </ul>
         <ul className="right">
-          <li>Выйти</li>
+          <Link to="/login">
+            <li>Выйти</li>
+          </Link>
           <img src="exit.svg" alt="exit" />
         </ul>
       </nav>

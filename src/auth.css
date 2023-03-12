@@ -131,6 +131,15 @@
   background: linear-gradient(104.34deg, #41522e -15.34%, #be8022 145.95%);
 }
 
+.form-btn:hover {
+  background: linear-gradient(0deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2)),
+    linear-gradient(104.34deg, #41522e -15.34%, #be8022 145.95%);
+}
+.form-btn:active {
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
+    linear-gradient(104.34deg, #41522e -15.34%, #be8022 145.95%);
+}
+
 .login100-form-btn::before {
   content: '';
   display: block;
@@ -169,6 +178,7 @@
   margin-left: 32px;
   margin-top: 7px;
   font-size: 12px;
+  color: red;
 }
 
 .error:active {
@@ -663,6 +673,13 @@ input[type='date']::-webkit-calendar-picker-indicator {
 
 /*HOTEL CARD*/
 
+.hotel-card-img {
+  cursor: pointer;
+}
+.hotel-card-img:hover {
+  cursor: pointer;
+  color: #333333;
+}
 .hotel-list {
   padding-bottom: 16px;
   padding-right: 32px;
