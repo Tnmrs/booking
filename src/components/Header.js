@@ -1,5 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import '../auth.css';
+import '../main.css';
 const Header = () => {
   return (
     <div className="header">
@@ -8,7 +10,7 @@ const Header = () => {
           <li className="logo-name">Simple Hotel Check</li>
         </ul>
         <ul className="right">
-          <Link to="/login">
+          <Link className="header-title" style={{ textDecoration: 'none' }} to="/login">
             <li>Выйти</li>
           </Link>
           <img src="exit.svg" alt="exit" />

@@ -343,6 +343,16 @@
   display: flex;
 }
 
+.p-t-32 {
+  padding-top: 32px;
+}
+.p-b-9 {
+  padding-bottom: 9px;
+}
+.m-t-20 {
+  margin-top: 20px;
+}
+
 .block {
   margin-bottom: 20px;
   border-radius: 16px;
@@ -639,6 +649,8 @@ input[type='date']::-webkit-calendar-picker-indicator {
 }
 .hotel-card-right {
   position: relative;
+
+  margin-top: auto;
 }
 
 .hotel-card-fav-icon {
@@ -701,6 +713,8 @@ input[type='date']::-webkit-calendar-picker-indicator {
 .hotel-list-block {
   display: flex;
   justify-content: space-between;
+
+  position: relative;
 }
 .hotel-list-card-title {
   margin-left: 24px;
@@ -784,4 +798,15 @@ input[type='date']::-webkit-calendar-picker-indicator {
   top: 8px;
   right: 7px;
   transform: rotate(180deg);
+}
+
+.header-title li {
+  font-family: sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+  letter-spacing: -0.408px;
+  color: #41522e;
+  text-decoration: none;
 }

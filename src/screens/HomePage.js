@@ -31,11 +31,11 @@ const HomePage = () => {
   const [sortByPrice, setSortByPrice] = useState(false);
   const [searchHotel, setSearchHotel] = useState('Москва');
   const [checkInDate, setCheckInDate] = useState(new Date().toISOString().slice(0, 10));
-  const [amountDays, setAmountDays] = useState(1); //дни
+  const [amountDays, setAmountDays] = useState(1);
 
   const [selectedCheckInDate, setSelectedCheckInDate] = useState(checkInDate);
-  const [searchHotelValue, setSearchHotelValue] = useState('Москва'); //Город
-  const [dateNumberOf, setDateNumberOf] = useState('');
+  const [searchHotelValue, setSearchHotelValue] = useState('Москва');
+  const [dateNumberOf, setDateNumberOf] = useState('1');
 
   const [sort, setSort] = useState('');
   const favoriteHotels = useSelector((state) => state.app.favoriteHotels);
@@ -107,12 +107,6 @@ const HomePage = () => {
     setSortByRating(true);
     setSortByPrice(false);
   };
-
-  const date = new Date(
-    new Date(checkInDate).getTime() + (Number(amountDays) - 1) * 24 * 60 * 60 * 1000,
-  )
-    .toISOString()
-    .slice(0, 10);
 
   return (
     <div>

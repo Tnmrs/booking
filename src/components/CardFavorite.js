@@ -70,8 +70,13 @@ const CardFavorite = ({ hotel, currentDate, checkOutDate }) => {
         </div>
 
         <div className="hotel-card-right">
-          <div className="hotel-card-fav-icon">
-            <img onClick={toggleFavorite} src={isAdded ? '/like.svg' : '/likepng.svg'} />
+          <div>
+            <img
+              alt="like"
+              className="hotel-card-fav-icon"
+              onClick={toggleFavorite}
+              src={isAdded ? '/like.svg' : '/likepng.svg'}
+            />
           </div>
 
           <div className="hotel-card-price">

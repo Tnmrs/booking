@@ -43,13 +43,13 @@ h6 {
   margin: 0px;
 }
 
-p {
+/* p {
   font-family: Poppins-Regular;
   font-size: 14px;
   line-height: 1.7;
   color: #666666;
   margin: 0px;
-}
+} */
 
 ul,
 li {
@@ -162,7 +162,7 @@ iframe {
 /*==================================================================
 [ Form ]*/
 
-.login100-form-title {
+/* .login100-form-title {
   width: 100%;
   display: block;
   font-family: Montserrat-Medium;
@@ -170,7 +170,7 @@ iframe {
   color: #555555;
   line-height: 1.2;
   text-align: center;
-}
+} */
 
 .focus-input100 {
   position: absolute;
