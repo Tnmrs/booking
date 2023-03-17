@@ -5,17 +5,17 @@ const InputBlock = ({
   handleSearchChange,
   checkInDate,
   handleCheckInChange,
-  dateNumber,
+
   handleCheckOutChange,
   handleClick,
-  amountDays,
+
   numDays,
 }) => {
   return (
-    <div class="block block1">
+    <div className="block block1">
       <div className="container-home-location">
         <div className="wrap-home ">
-          <form class="form validate-form ">
+          <form className="form validate-form ">
             <div className="p-t-32 p-b-9 ">
               <span className="title-form-home ">Локация</span>
               <div className="wrap-input-home validate-input">
@@ -52,8 +52,8 @@ const InputBlock = ({
               </div>
             </div>
           </form>
-          <div class="container-btn">
-            <button class="form-btn-home" onClick={handleClick}>
+          <div className="container-btn">
+            <button className="form-btn-home" onClick={handleClick}>
               Найти
             </button>
           </div>

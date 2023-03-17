@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { ADD_TO_FAVORITES, REMOVE_FROM_FAVORITES } from '../store/actions';
 import { Rating } from 'react-simple-star-rating';
 
-const CardHotels = ({ hotel, checkOutDate, currentDate }) => {
+const CardHotels = ({ hotel, checkOutDate, currentDate, name }) => {
   const dispatch = useDispatch();
   const [isAdded, setIsAdded] = useState(false);
   const [rating, setRating] = useState(hotel.stars);

@@ -69,17 +69,17 @@ const Auth = () => {
   };
   return (
     <div>
-      <div class="container">
-        <div class="container-login">
-          <div class="wrap">
-            <form class="form validate-form" onSubmit={loginHandler}>
+      <div className="container">
+        <div className="container-login">
+          <div className="wrap">
+            <form className="form validate-form" onSubmit={loginHandler}>
               <h1 className="form-title">Simple Hotel Check</h1>
-              <div class="p-t-31 p-b-9">
-                <span class="title-form">Логин</span>
+              <div className="p-t-31 p-b-9">
+                <span className="title-form">Логин</span>
               </div>
-              <div class="wrap-input validate-input" data-validate="Username is required">
+              <div className="wrap-input validate-input" data-validate="Username is required">
                 <input
-                  class="input"
+                  className="input"
                   onChange={(e) => emailHandler(e)}
                   value={email}
                   onBlur={(e) => blurHandler(e)}
@@ -90,12 +90,12 @@ const Auth = () => {
               </div>
               {emailDirty && emailError && <div className="error">{emailError}</div>}
 
-              <div class="p-t-13 p-b-9">
-                <span class="title-form">Пароль</span>
+              <div className="p-t-13 p-b-9">
+                <span className="title-form">Пароль</span>
               </div>
-              <div class="wrap-input validate-input" data-validate="Password is required">
+              <div className="wrap-input validate-input" data-validate="Password is required">
                 <input
-                  class="input"
+                  className="input"
                   onChange={(e) => passwordHandler(e)}
                   value={password}
                   onBlur={(e) => blurHandler(e)}
@@ -106,8 +106,8 @@ const Auth = () => {
               </div>
               {passwordDirty && passwordError && <div className="error">{passwordError}</div>}
 
-              <div class="container-btn">
-                <button class="form-btn" type="submit">
+              <div className="container-btn">
+                <button className="form-btn" type="submit">
                   Войти
                 </button>
               </div>

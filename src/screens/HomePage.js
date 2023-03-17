@@ -111,12 +111,12 @@ const HomePage = () => {
   return (
     <div>
       <Header />
-      <div class="container-page">
+      <div className="container-page">
         <div className="lefts">
-          <div class="block block1">
+          <div className="block block1">
             <div className="container-home-location">
               <div className="wrap-home ">
-                <form class="form validate-form ">
+                <form className="form validate-form ">
                   <div className="p-t-32 p-b-9 ">
                     <span className="title-form-home ">Локация</span>
                     <div className="wrap-input-home validate-input">
@@ -163,15 +163,15 @@ const HomePage = () => {
                     </div>
                   </div>
                 </form>
-                <div class="container-btn">
-                  <button class="form-btn-home" onClick={handleClick}>
+                <div className="container-btn">
+                  <button className="form-btn-home" onClick={handleClick}>
                     Найти
                   </button>
                 </div>
               </div>
             </div>
           </div>
-          <div class="block block2">
+          <div className="block block2">
             <div className="container-home-location">
               <div className="wrap-home-price">
                 <div>
@@ -214,7 +214,7 @@ const HomePage = () => {
         </div>
 
         <div className="rights">
-          <div class="block block3">
+          <div className="block block3">
             <div className="container-home-location">
               <div className="wrap-home-hotels">
                 <div className="wraps">
@@ -236,20 +236,19 @@ const HomePage = () => {
                   </p>
 
                   <div className="container-card">
-                    {hotels &&
-                      hotels.map((hotel) => (
-                        <div key={hotel.id}>
-                          <CardHotels
-                            isFavorite={isFavorite}
-                            onClickFavorite={onClickFavorite}
-                            hotel={hotel}
-                            checkInDate={selectedCheckInDate}
-                            checkOutDate={dateNumberOf}
-                            currentDate={currentDate}
-                            hotelWordForm={hotelWordForm}
-                          />
-                        </div>
-                      ))}
+                    {hotels.map((hotel) => (
+                      <div key={hotel.id}>
+                        <CardHotels
+                          isFavorite={isFavorite}
+                          onClickFavorite={onClickFavorite}
+                          hotel={hotel}
+                          checkInDate={selectedCheckInDate}
+                          checkOutDate={dateNumberOf}
+                          currentDate={currentDate}
+                          hotelWordForm={hotelWordForm}
+                        />
+                      </div>
+                    ))}
                   </div>
                 </div>
               </div>
