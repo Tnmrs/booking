@@ -30,7 +30,7 @@ If the user selects new search data, the list of favorite hotels is not reset. W
 ## Install dependencies:
  yarn install
 
-##Start the app in dev:
+## Start the app in dev:
 yarn dev
 
 ## Start the app in production:
