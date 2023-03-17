@@ -1,70 +1,40 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## The project is a SPA (Single Page Application) developed in React using Redux-saga and React Router. The project implements authorization and display pages for hotels.
 
-In the project directory, you can run:
+On the authorization page, the user can enter his login and password, which pass the standard validation. If the entered data does not pass validation, an error warning is displayed. When entering the site with valid data, the user is redirected to the hotels page.
 
-### `npm start`
+On the hotels page, the user can enter a city, arrival date and number of days, as a result of which hotels and information about them are displayed. The page displays a carousel of images that you can scroll through. The user can add hotels to favorites and remove them from it. Selected hotels can be sorted by cost and number of stars.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Travelpayouts.com API is used to get hotel data. When you first load the page with default data, the corresponding hotels are displayed.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+If the user selects new search data, the list of favorite hotels is not reset. When reloading the page with hotels, the user's authorization is not reset.
 
-### `npm test`
+When you click on the "Exit" button, the authorization is reset and you are redirected to the authorization page.
+The project is a SPA (Single Page Application) developed in React using Redux-saga and React Router. The project implements authorization and display pages for hotels.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+On the authorization page, the user can enter his login and password, which pass the standard validation. If the entered data does not pass validation, an error warning is displayed. When entering the site with valid data, the user is redirected to the hotels page.
 
-### `npm run build`
+On the hotels page, the user can enter a city, arrival date and number of days, as a result of which hotels and information about them are displayed. The page displays a carousel of images that you can scroll through. The user can add hotels to favorites and remove them from it. Selected hotels can be sorted by cost and number of stars.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Travelpayouts.com API is used to get hotel data. When you first load the page with default data, the corresponding hotels are displayed.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+If the user selects new search data, the list of favorite hotels is not reset. When reloading the page with hotels, the user's authorization is not reset.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+<img width="1680" alt="Снимок экрана 2023-03-14 в 22 18 32" src="https://user-images.githubusercontent.com/106652477/225995326-25c90acb-0885-49e1-80cf-87eccb0f8aa7.png">
+<img width="1680" alt="Снимок экрана 2023-03-14 в 22 18 45" src="https://user-images.githubusercontent.com/106652477/225995370-a95e32b4-132c-4d8a-b026-96c3afbab98a.png">
 
-### `npm run eject`
+<img width="1680" alt="Снимок экрана 2023-03-14 в 22 18 57" src="https://user-images.githubusercontent.com/106652477/225995398-66c4059e-df70-44a5-88e6-5c002c8d82fe.png">
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Clone the project https://github.com/Tnmrs/booking.git
+## Install dependencies:
+ yarn install
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+##Start the app in dev:
+yarn dev
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Start the app in production:
+yarn build
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## then:
+yarn start
